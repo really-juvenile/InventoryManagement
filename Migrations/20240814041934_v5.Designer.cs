@@ -4,6 +4,7 @@ using InventoryManagement.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InventoryManagement.Migrations
 {
     [DbContext(typeof(InventoryContext))]
-    partial class InventoryContextModelSnapshot : ModelSnapshot
+    [Migration("20240814041934_v5")]
+    partial class v5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,7 +54,7 @@ namespace InventoryManagement.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("InventoryID")
+                    b.Property<int>("InventoryID")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -83,7 +86,7 @@ namespace InventoryManagement.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("InventoryID")
+                    b.Property<int>("InventoryID")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -108,7 +111,7 @@ namespace InventoryManagement.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("InventoryID")
+                    b.Property<int>("InventoryID")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsAddition")
@@ -133,7 +136,9 @@ namespace InventoryManagement.Migrations
                 {
                     b.HasOne("InventoryManagement.Models.Inventory", "Inventory")
                         .WithMany("Products")
-                        .HasForeignKey("InventoryID");
+                        .HasForeignKey("InventoryID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Inventory");
                 });
@@ -142,7 +147,9 @@ namespace InventoryManagement.Migrations
                 {
                     b.HasOne("InventoryManagement.Models.Inventory", "Inventory")
                         .WithMany("Suppliers")
-                        .HasForeignKey("InventoryID");
+                        .HasForeignKey("InventoryID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Inventory");
                 });
@@ -151,7 +158,9 @@ namespace InventoryManagement.Migrations
                 {
                     b.HasOne("InventoryManagement.Models.Inventory", "Inventory")
                         .WithMany("Transactions")
-                        .HasForeignKey("InventoryID");
+                        .HasForeignKey("InventoryID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("InventoryManagement.Models.Product", "Product")
                         .WithMany()

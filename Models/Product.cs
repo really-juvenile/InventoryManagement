@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,11 @@ namespace InventoryManagement.Models
         public int Quantity { get; set; }
 
         public double Price { get; set; }
+
+        [ForeignKey("InventoryID")]
+        public int? InventoryID { get; set; }
+        public Inventory Inventory { get; set; }
+
         //inventoryid? foreign key
         //many product one inventory
         //inventory ctor mt,parametr
@@ -26,7 +32,7 @@ namespace InventoryManagement.Models
 
         //public Product()
         //{
-            
+
         //}
         ////empty constructor
         //public Product(string name,string desc, int qty,double price)
