@@ -49,7 +49,8 @@ namespace InventoryManagement.Models
                 $"Product NAme : {Name}\n" +
                 $"Product description: {Description}\n" +
                 $"Product Quantity: {Quantity}\n" +
-                $"Product Price:  {Price}\n";
+                $"Product Price:  {Price}\n" +
+                $"==============================================";
         }
     }
 }

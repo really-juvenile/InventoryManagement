@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InventoryManagement.Data;
+using InventoryManagement.Exceptions;
 using InventoryManagement.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,25 +25,36 @@ namespace InventoryManagement.Repositories
 
         public void UpdateProduct(Product product)
         {
-
+            var existingProduct = _context.Products.Find(product.ProductID);
+            if (existingProduct == null)
+            {
+                throw new ProductNotFoundException(product.ProductID);
+            }
             _context.Products.Update(product);
             _context.SaveChanges();
-
         }
 
         public string DeleteProduct(int productId)
         {
-
-            var productToDelete = _context.Products.Where(x => x.ProductID == productId).FirstOrDefault();
-            if (productToDelete != null)
+            var productToDelete = _context.Products.Find(productId);
+            if (productToDelete == null)
             {
-                _context.Products.Remove(productToDelete);
-                _context.SaveChanges();
-                return "Product deleted Successfully";
+                throw new ProductNotFoundException(productId);
             }
-            return "No such product exits";
+            _context.Products.Remove(productToDelete);
+            _context.SaveChanges();
+            return "Product deleted successfully";
         }
 
+        //public Product GetProductById(int productId)
+        //{
+        //    var product = _context.Products.Find(productId);
+        //    if (product == null)
+        //    {
+        //        throw new ProductNotFoundException(productId);
+        //    }
+        //    return product;
+        //}
 
 
         public List<Product> GetAllProducts()

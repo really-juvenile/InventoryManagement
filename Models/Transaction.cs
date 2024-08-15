@@ -41,7 +41,8 @@ namespace InventoryManagement.Models
                   $"Product ID: {ProductID}\n" +
                   $"Quantity: {Quantity}\n" +
                   $"Date: {Date}\n" +
-                  $"Type: {type}\n";
+                  $"Type: {type}\n" +
+                  $"==============================================";
         }
 
     }

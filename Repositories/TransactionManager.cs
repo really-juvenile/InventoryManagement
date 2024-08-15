@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using InventoryManagement.Data;
 using InventoryManagement.Models;
 using Microsoft.EntityFrameworkCore;
+using InventoryManagement.Exceptions;
 
 namespace InventoryManagement.Repositories
 {
@@ -23,14 +24,14 @@ namespace InventoryManagement.Repositories
             _context = context;
         }
 
-        public string AddStock(int productId, int quantity)
+        public void AddStock(int productId, int quantity)
         {
-            var product = _context.Products.FirstOrDefault(p => p.ProductID == productId);
+            var product = _context.Products.Find(productId);
             if (product == null)
-                return "Product not found.";
-
+            {
+                throw new ProductNotFoundException(productId);
+            }
             product.Quantity += quantity;
-            _context.Products.Update(product);
 
             var transaction = new Transaction
             {
@@ -39,23 +40,18 @@ namespace InventoryManagement.Repositories
                 Date = DateTime.Now,
                 IsAddition = true
             };
-
             _context.Transactions.Add(transaction);
             _context.SaveChanges();
-            return "Stock added successfully.";
         }
 
-        public string RemoveStock(int productId, int quantity)
+        public void RemoveStock(int productId, int quantity)
         {
-            var product = _context.Products.FirstOrDefault(p => p.ProductID == productId);
+            var product = _context.Products.Find(productId);
             if (product == null)
-                return "Product not found.";
-
-            if (product.Quantity < quantity)
-                return "Insufficient stock.";
-
+            {
+                throw new ProductNotFoundException(productId);
+            }
             product.Quantity -= quantity;
-            _context.Products.Update(product);
 
             var transaction = new Transaction
             {
@@ -64,11 +60,19 @@ namespace InventoryManagement.Repositories
                 Date = DateTime.Now,
                 IsAddition = false
             };
-
             _context.Transactions.Add(transaction);
             _context.SaveChanges();
-            return "Stock removed successfully.";
         }
+
+        //public Transaction GetTransactionById(int transactionId)
+        //{
+        //    var transaction = _context.Transactions.Find(transactionId);
+        //    if (transaction == null)
+        //    {
+        //        throw new TransactionNotFoundException(transactionId);
+        //    }
+        //    return transaction;
+        //}
 
         public List<Transaction> GetAllTransactions()
         {

@@ -19,48 +19,7 @@ namespace InventoryManagement
             MainMenu();
         }
 
-        //        static void Main(string[] args)
-        //        {
-        //            //// SupplierManager supplierManager = new SupplierManager(new InventorContext());
-        //            //ProductManager productManager = new ProductManager(new InventoryContext());
-        //            //SupplierManager supplierManager = new SupplierManager(new InventoryContext());
-        //            ////ProductManager productManager1 = new ProductManager();
-        //            ////SupplierManager supplierManager1  = new SupplierManager(context);
-
-
-
-        //            //Product newProduct = new Product
-        //            //{
-        //            //    Name = "Laptop",
-        //            //    Description = "A high-performance laptop",
-        //            //    Quantity = 10,
-        //            //    Price = 1500
-        //            //};
-        //            //productManager.AddProduct(newProduct);
-        //            //Console.WriteLine("New product added Successfully");
-
-        //// Read all products
-        ////List<Product> products = productManager.GetAllProducts();
-        ////    foreach (var product in products)
-        ////    {
-        ////        Console.WriteLine($"{product.ProductID} - {product.Name}");
-        ////    }
-
-        //var products = productManager.GetAllProducts();
-        //products.ForEach(p => Console.WriteLine(p));
-
-        ////Console.WriteLine(productManager.DeleteProduct(1));
-
-
-
-
-
-        ////Supplier newSupplier = new Supplier
-        ////{
-        ////    Name = "Tech Supplies",
-        ////    ContactInfo = "techsupplies@example.com"
-        ////};
-        ////supplierManager.AddSupplier(newSupplier);
+      
 
 
         static void MainMenu()
@@ -73,19 +32,20 @@ namespace InventoryManagement
 
 
 
-            Product newProduct = new Product
-            {
-                Name = "Laptop",
-                Description = "A high-performance laptop",
-                Quantity = 10,
-                Price = 1500
-            };
-            productManager.AddProduct(newProduct);
-            Console.WriteLine("New product added Successfully");
+            //Product newProduct = new Product
+            //{
+            //    Name = "Laptop",
+            //    Description = "A high-performance laptop",
+            //    Quantity = 10,
+            //    Price = 1500
+            ////};
+            //productManager.AddProduct(newProduct);
+            //Console.WriteLine("New product added Successfully");
 
             while (true)
             {
                 Console.WriteLine("Welcome to the Inventory Management System");
+                Console.WriteLine("==============================================");
                 Console.WriteLine("1. Product Management");
                 Console.WriteLine("2. Supplier Management");
                 Console.WriteLine("3. Transaction Management");
@@ -109,7 +69,8 @@ namespace InventoryManagement
                         GenerateReportMenu(productManager, supplierManager, transactionManager);
                         break;
                     case 5:
-                        return;
+                        Environment.Exit(0);
+                        break;
                     default:
                         Console.WriteLine("Invalid choice, please try again.");
                         break;
@@ -122,6 +83,7 @@ namespace InventoryManagement
             while (true)
             {
                 Console.WriteLine("\nProduct Management");
+                Console.WriteLine("==============================================");
                 Console.WriteLine("1. Add Product");
                 Console.WriteLine("2. Update Product");
                 Console.WriteLine("3. Delete Product");
@@ -162,6 +124,7 @@ namespace InventoryManagement
             while (true)
             {
                 Console.WriteLine("\nSupplier Management");
+                Console.WriteLine("==============================================");
                 Console.WriteLine("1. Add Supplier");
                 Console.WriteLine("2. Update Supplier");
                 Console.WriteLine("3. Delete Supplier");
@@ -202,6 +165,7 @@ namespace InventoryManagement
             while (true)
             {
                 Console.WriteLine("\nTransaction Management");
+                Console.WriteLine("==============================================");
                 Console.WriteLine("1. Add Stock");
                 Console.WriteLine("2. Remove Stock");
                 Console.WriteLine("3. View Transaction History");

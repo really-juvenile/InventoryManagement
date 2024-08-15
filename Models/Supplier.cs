@@ -32,7 +32,8 @@ namespace InventoryManagement.Models
         {
             return $"Supplier ID: {SupplierID}\n" +
                 $"Supplier Name: {Name}\n" +
-                $"Supplier Contact Info: {ContactInfo}\n";
+                $"Supplier Contact Info: {ContactInfo}\n" +
+                $"==============================================";
         }
     }
 }
