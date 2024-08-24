@@ -50,15 +50,15 @@ namespace InventoryManagement.Repositories
             _context.SaveChanges();
         }
 
-        //public Supplier GetSupplierById(int supplierId)
-        //{
-        //    var supplier = _context.Suppliers.Find(supplierId);
-        //    if (supplier == null)
-        //    {
-        //        throw new SupplierNotFoundException(supplierId);
-        //    }
-        //    return supplier;
-        //}
+        public Supplier GetSupplierById(int supplierId)
+        {
+            var supplier = _context.Suppliers.Find(supplierId);
+            if (supplier == null)
+            {
+                throw new SupplierNotFoundException(supplierId);
+            }
+            return supplier;
+        }
         public Supplier GetSupplierByID(int supplierId)
         {
             var supplier = _context.Suppliers.Find(supplierId);

@@ -46,15 +46,15 @@ namespace InventoryManagement.Repositories
             return "Product deleted successfully";
         }
 
-        //public Product GetProductById(int productId)
-        //{
-        //    var product = _context.Products.Find(productId);
-        //    if (product == null)
-        //    {
-        //        throw new ProductNotFoundException(productId);
-        //    }
-        //    return product;
-        //}
+        public Product GetProductById(int productId)
+        {
+            var product = _context.Products.Find(productId);
+            if (product == null)
+            {
+                throw new ProductNotFoundException(productId);
+            }
+            return product;
+        }
 
 
         public List<Product> GetAllProducts()
